@@ -1,0 +1,128 @@
+/* eslint-disable react-native/no-inline-styles */
+import React, {ReactElement, useState} from 'react';
+import {
+  Text,
+  View,
+  Image,
+  TextInput,
+  Button,
+  Alert,
+  Switch,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {login, register} from '../Utils/Account';
+
+const colors = {
+  primary: '#99cc00',
+};
+
+const Login = ({navigation}): ReactElement => {
+  const [userID, setUserID] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [roleSwitch, setRoleSwitch] = useState<boolean>(true);
+
+  const jumpToChild = () => {
+    navigation.navigate('Child');
+  };
+
+  const jumpToParent = () => {
+    navigation.navigate('Parent');
+  };
+
+  return (
+    <View
+      style={{
+        flexDirection: 'column',
+        padding: 20,
+        alignItems: 'center',
+      }}>
+      <View style={{height: 40}} />
+      <View style={{maxHeight: 200}}>
+        <Image
+          source={require('../Assets/image/logo.png')}
+          style={{height: 200, width: 200}}
+        />
+      </View>
+      <View style={{height: 50}} />
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
+        <Icon name="user-circle" size={18} color={colors.primary} />
+        <View style={{width: 15}} />
+        <TextInput
+          placeholder="用户 ID"
+          style={{
+            width: 200,
+            borderBottomWidth: 1,
+            padding: 0,
+          }}
+          value={userID}
+          onChangeText={setUserID}
+        />
+      </View>
+
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginBottom: 25}}>
+        <Icon name="key" size={18} color={colors.primary} />
+        <View style={{width: 15}} />
+        <TextInput
+          placeholder="密码"
+          style={{
+            width: 200,
+            borderBottomWidth: 1,
+            padding: 0,
+          }}
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+        />
+      </View>
+
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Button
+          title="登录"
+          onPress={() => {
+            login(userID, password, roleSwitch ? 'Teen' : 'Parent').then(
+              data => {
+                if (data.status === 'ok') {
+                  if (roleSwitch) {
+                    jumpToChild();
+                  } else {
+                    jumpToParent();
+                  }
+                } else {
+                  Alert.alert('登录失败!');
+                }
+              },
+            );
+            // Alert.alert(
+            //   '姑且这里应该用 Fetch，但 raise NotImplemented Error',
+            //   `${userID} + ${password}`,
+            // );
+          }}
+        />
+        <View style={{width: 20}} />
+        <Button
+          title="注册"
+          onPress={() => {
+            register(userID, password, roleSwitch ? 'Teen' : 'Parent');
+          }}
+        />
+      </View>
+      <View style={{height: 20}} />
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginBottom: 25}}>
+        <Text style={{marginRight: 10}}>
+          {roleSwitch === true ? '我是青少年' : '我是家长'}
+        </Text>
+        <Switch
+          onValueChange={() => {
+            setRoleSwitch(!roleSwitch);
+          }}
+          value={roleSwitch}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default Login;
