@@ -2,9 +2,9 @@
 
 An Android Application used as a demo for "互联网+ 大赛".
 
-Those "creative" ideas credited to the group leader.
+Those "creative" ideas are credited to the designing group.
 
-The repo author is only related to the development part.
+The repo author is only doing the programming part.
 
 
 
