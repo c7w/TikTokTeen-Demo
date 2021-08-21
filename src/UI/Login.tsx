@@ -35,6 +35,8 @@ const Login = ({navigation}): ReactElement => {
         flexDirection: 'column',
         padding: 20,
         alignItems: 'center',
+        backgroundColor: 'black',
+        height: '100%',
       }}>
       <View style={{height: 40}} />
       <View style={{maxHeight: 200}}>
@@ -49,10 +51,11 @@ const Login = ({navigation}): ReactElement => {
         <Icon name="user-circle" size={18} color={colors.primary} />
         <View style={{width: 15}} />
         <TextInput
-          placeholder="用户 ID"
           style={{
             width: 200,
             borderBottomWidth: 1,
+            borderColor: 'white',
+            color: 'white',
             padding: 0,
           }}
           value={userID}
@@ -65,10 +68,11 @@ const Login = ({navigation}): ReactElement => {
         <Icon name="key" size={18} color={colors.primary} />
         <View style={{width: 15}} />
         <TextInput
-          placeholder="密码"
           style={{
             width: 200,
             borderBottomWidth: 1,
+            borderColor: 'white',
+            color: 'white',
             padding: 0,
           }}
           secureTextEntry={true}
@@ -111,7 +115,7 @@ const Login = ({navigation}): ReactElement => {
       <View style={{height: 20}} />
       <View
         style={{flexDirection: 'row', alignItems: 'center', marginBottom: 25}}>
-        <Text style={{marginRight: 10}}>
+        <Text style={{marginRight: 10, borderColor: 'white', color: 'white'}}>
           {roleSwitch === true ? '我是青少年' : '我是家长'}
         </Text>
         <Switch
@@ -119,6 +123,8 @@ const Login = ({navigation}): ReactElement => {
             setRoleSwitch(!roleSwitch);
           }}
           value={roleSwitch}
+          thumbColor={'yellow'}
+          trackColor={{ false: 'blue', true: 'green'}}
         />
       </View>
     </View>

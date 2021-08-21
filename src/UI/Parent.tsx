@@ -7,7 +7,7 @@ const Parent = () => {
   const [parent, setParent] = useState(<ActivityIndicator />);
   useEffect(() => {
     // Retrieve data
-    const data = {bind: true};
+    const data = {bind: false};
     if (data.bind) {
       setParent(<ParentAlreadyBind />);
     } else {
