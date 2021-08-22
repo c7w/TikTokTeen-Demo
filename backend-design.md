@@ -128,6 +128,6 @@ POST.body
 Res.json()
 
 ```json
-{'status': 'ok'}
+{"status": "ok"}
 ```
 
