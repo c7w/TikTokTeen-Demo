@@ -89,31 +89,31 @@ BASE_URL 下应有以下请求方法
 
 ```json
 {
-    'verifyQuestions': [
+    "verifyQuestions": [
         {
             "question": "题面",
             "options": ["A", "B", "C", "D"],
-            "answer": 0 // 数组的 第 i 个元素 为正确答案
+            "answer": 0 //数组的第i个元素为正确答案
         }, 
         {
             "question": "题面2",
             "options": ["A", "B", "C", "D"],
-            "answer": 0 // 数组的 第 i 个元素 为正确答案
+            "answer": 0 //数组的第i个元素为正确答案
         }, 
         {
             "question": "题面3",
             "options": ["A", "B", "C", "D"],
-            "answer": 0 // 数组的 第 i 个元素 为正确答案
+            "answer": 0 //数组的第i个元素为正确答案
         }, 
         {
             "question": "题面4",
             "options": ["A", "B", "C", "D"],
-            "answer": 0 // 数组的 第 i 个元素 为正确答案
+            "answer": 0 //数组的第i个元素为正确答案
         }, 
         {
             "question": "题面5",
             "options": ["A", "B", "C", "D"],
-            "answer": 0 // 数组的 第 i 个元素 为正确答案
+            "answer": 0 //数组的第i个元素为正确答案
         }
     ]
 }
