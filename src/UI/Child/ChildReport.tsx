@@ -1,9 +1,8 @@
 import React from 'react';
 import {ActivityIndicator, View} from 'react-native';
-import {Button, Image, Text} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Image, Text} from 'react-native-elements';
 
-const childReport = () => {
+const ChildReport = () => {
   return (
     <View style={{height: '100%', flexDirection: 'column'}}>
       <Text
@@ -101,4 +100,4 @@ const childReport = () => {
   );
 };
 
-export default childReport;
+export default ChildReport;

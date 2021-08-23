@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ChildFootbar = () => {
+import ChildInfo from './ChildInfo';
+import ChildMessage from './ChildMessage';
+import ChildNew from './ChildNew';
+import ChildExplore from './ChildExplore';
+import ChildReport from './ChildReport';
+
+interface ChildProps {
+  id: number;
+  username: string;
+  uniqueId: string;
+  verified: boolean;
+}
+
+interface FootBarProps {
+  callback: (element: ReactElement) => void;
+  childProps: ChildProps;
+}
+
+const ChildFootbar = ({callback, childProps}: FootBarProps) => {
   return (
     <View
       style={{
@@ -28,6 +46,9 @@ const ChildFootbar = () => {
             <Text style={{fontSize: 8}}>报告</Text>
           </View>
         }
+        onPress={() => {
+          callback(<ChildReport />);
+        }}
         type="clear"
       />
       <Button
@@ -44,6 +65,9 @@ const ChildFootbar = () => {
             <Text style={{fontSize: 8}}>发现</Text>
           </View>
         }
+        onPress={() => {
+          callback(<ChildExplore />);
+        }}
         type="clear"
       />
       <Button
@@ -59,6 +83,9 @@ const ChildFootbar = () => {
             <Icon name="plus-square" size={32} />
           </View>
         }
+        onPress={() => {
+          callback(<ChildNew verified={childProps.verified} />);
+        }}
         type="clear"
       />
       <Button
@@ -75,6 +102,9 @@ const ChildFootbar = () => {
             <Text style={{fontSize: 8}}>消息</Text>
           </View>
         }
+        onPress={() => {
+          callback(<ChildMessage />);
+        }}
         type="clear"
       />
       <Button
@@ -92,6 +122,9 @@ const ChildFootbar = () => {
           </View>
         }
         type="clear"
+        onPress={() => {
+          callback(<ChildInfo props={childProps} />);
+        }}
       />
     </View>
   );

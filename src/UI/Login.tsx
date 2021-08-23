@@ -1,4 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
+import {
+  NavigationAction,
+  NavigationContainerProps,
+  NavigationState,
+  NavigatorScreenParams,
+  StackNavigationState,
+} from '@react-navigation/native';
 import React, {ReactElement, useState} from 'react';
 import {
   Text,
@@ -17,6 +24,7 @@ const colors = {
 };
 
 const Login = ({navigation}): ReactElement => {
+
   const [userID, setUserID] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [roleSwitch, setRoleSwitch] = useState<boolean>(true);
@@ -124,7 +132,7 @@ const Login = ({navigation}): ReactElement => {
           }}
           value={roleSwitch}
           thumbColor={'yellow'}
-          trackColor={{ false: 'blue', true: 'green'}}
+          trackColor={{false: 'blue', true: 'green'}}
         />
       </View>
     </View>

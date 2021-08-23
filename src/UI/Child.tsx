@@ -1,15 +1,30 @@
+import { StackNavigationState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, ActivityIndicator} from 'react-native';
-import ChildFootbar from './Child/ChildFootbar';
-import childInfo from './Child/ChildInfo';
-import childMessage from './Child/ChildMessage';
 
-const Child = () => {
+import ChildFootbar from './Child/ChildFootbar';
+import ChildReport from './Child/ChildReport';
+
+interface ChildProps {
+  id: number;
+  username: string;
+  uniqueId: string;
+  verified: boolean;
+}
+
+const Child = ({
+  navigation,
+  childProps,
+}: {
+  navigation;
+  childProps: ChildProps;
+}) => {
   const [childContent, setChildContent] = useState(<ActivityIndicator />);
   useEffect(() => {
     // Retrieve data
-    setChildContent(childInfo());
+    setChildContent(<ChildReport />);
   }, []);
+
   return (
     <View
       style={{
@@ -23,7 +38,7 @@ const Child = () => {
         style={{
           height: '7%',
         }}>
-        <ChildFootbar />
+        <ChildFootbar callback={setChildContent} childProps={childProps} />
       </View>
     </View>
   );

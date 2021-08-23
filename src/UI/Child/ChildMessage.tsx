@@ -1,9 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Button, Text} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Text} from 'react-native-elements';
 
-const childMessage = () => {
+const ChildMessage = () => {
   return (
     <View
       style={{
@@ -31,4 +30,4 @@ const childMessage = () => {
     </View>
   );
 };
-export default childMessage;
+export default ChildMessage;
