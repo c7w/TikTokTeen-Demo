@@ -19,9 +19,10 @@ interface ChildProps {
 interface FootBarProps {
   callback: (element: ReactElement) => void;
   childProps: ChildProps;
+  navigation
 }
 
-const ChildFootbar = ({callback, childProps}: FootBarProps) => {
+const ChildFootbar = ({callback, childProps, navigation}: FootBarProps) => {
   return (
     <View
       style={{
@@ -123,7 +124,7 @@ const ChildFootbar = ({callback, childProps}: FootBarProps) => {
         }
         type="clear"
         onPress={() => {
-          callback(<ChildInfo props={childProps} />);
+          callback(<ChildInfo props={childProps} navigation={navigation} />);
         }}
       />
     </View>

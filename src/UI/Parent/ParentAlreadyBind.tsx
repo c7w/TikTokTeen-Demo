@@ -3,8 +3,10 @@ import {View, Text, ActivityIndicator} from 'react-native';
 import {Button} from 'react-native-elements';
 import {Image} from 'react-native-elements/dist/image/Image';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ParseTime} from '../../Utils/Account';
+import Store from '../../Utils/Store';
 
-const ParentAlreadyBind = () => {
+const ParentAlreadyBind = ({navigation, parentProps}) => {
   return (
     <View
       style={{
@@ -27,13 +29,17 @@ const ParentAlreadyBind = () => {
           title={''}
           type="clear"
           icon={<Icon name="sign-out" color="white" size={30} />}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
         />
         <Text style={{color: 'white', paddingLeft: 10, fontSize: 20}}>
           使用报告
         </Text>
         <Text style={{flexGrow: 1}} />
-        <Text style={{color: 'white', fontSize: 18}}>Username</Text>
+        <Text style={{color: 'white', fontSize: 18}}>
+          {Store.getState().data.parentProps.username}
+        </Text>
       </View>
       <View
         style={{
@@ -74,7 +80,8 @@ const ParentAlreadyBind = () => {
               fontSize: 16,
               paddingBottom: '2%',
             }}>
-            您的孩子昨天的使用时长为：X 时 Y 分
+            您的孩子昨天的使用时长为：
+            {ParseTime(Store.getState().data.parentProps.watchedTime)}
           </Text>
           <Text
             style={{
@@ -83,7 +90,7 @@ const ParentAlreadyBind = () => {
               fontSize: 16,
               paddingBottom: '2%',
             }}>
-            共计播放视频数为 Z 个
+            共计播放视频数为 {Store.getState().data.parentProps.watchedTime} 个
           </Text>
           <Text
             style={{
@@ -98,7 +105,7 @@ const ParentAlreadyBind = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              height: '50%',
+              height: '40%',
               justifyContent: 'center',
               alignItems: 'center',
             }}>

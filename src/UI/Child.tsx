@@ -1,4 +1,4 @@
-import { StackNavigationState } from '@react-navigation/native';
+import {StackNavigationState} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 
@@ -7,7 +7,7 @@ import ChildReport from './Child/ChildReport';
 
 interface ChildProps {
   id: number;
-  username: string;
+  uesrname: string;
   uniqueId: string;
   verified: boolean;
 }
@@ -38,7 +38,11 @@ const Child = ({
         style={{
           height: '7%',
         }}>
-        <ChildFootbar callback={setChildContent} childProps={childProps} />
+        <ChildFootbar
+          callback={setChildContent}
+          childProps={childProps}
+          navigation={navigation}
+        />
       </View>
     </View>
   );

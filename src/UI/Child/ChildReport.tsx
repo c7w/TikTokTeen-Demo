@@ -1,6 +1,8 @@
 import React from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {Image, Text} from 'react-native-elements';
+import {ParseTime} from '../../Utils/Account';
+import Store from '../../Utils/Store';
 
 const ChildReport = () => {
   return (
@@ -33,7 +35,8 @@ const ChildReport = () => {
           fontSize: 16,
           paddingBottom: '2%',
         }}>
-        您昨天的使用时长为：X 时 Y 分
+        您昨天的使用时长为：
+        {ParseTime(Store.getState().data.childProps.watchedTime)}
       </Text>
       <Text
         style={{
@@ -42,7 +45,7 @@ const ChildReport = () => {
           fontSize: 16,
           paddingBottom: '2%',
         }}>
-        共计播放视频数为 Z 个
+        共计播放视频数为 {Store.getState().data.childProps.watchedTime} 个
       </Text>
       <Text
         style={{

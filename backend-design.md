@@ -57,6 +57,7 @@ BASE_URL 下应有以下请求方法
 
 + uniqueId: String
 + watchedTime: Number(in minutes)
++ verified: boolean
 
 [POST]
 

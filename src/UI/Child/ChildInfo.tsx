@@ -4,39 +4,41 @@ import Clipboard from '@react-native-community/clipboard';
 import {ListItem, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Toast from 'react-native-root-toast';
+import {NavigationContainer} from '@react-navigation/native';
+import Store from '../../Utils/Store';
 
 interface ChildProps {
   id: number;
-  username: string;
+  uesrname: string;
   uniqueId: string;
   verified: boolean;
 }
 
-const ChildInfo = ({props}: {props: ChildProps}) => {
+const ChildInfo = ({navigation, props}: {navigaion; props: ChildProps}) => {
   const list = [
     {
       title: '用户名',
       icon: 'address-card',
-      value: props.username,
+      value: Store.getState().data.childProps.uesrname,
     },
     {
       title: 'UID',
       icon: 'id-card',
-      value: props.id,
+      value: Store.getState().data.childProps.uesrname,
     },
     {
       title: '绑定凭证',
       icon: 'key',
-      value: props.uniqueId,
+      value: Store.getState().data.childProps.uniqueId,
       onPress: () => {
-        Clipboard.setString(props.uniqueId);
+        Clipboard.setString(Store.getState().data.childProps.uesrname);
         Toast.show('绑定凭证已复制到剪贴板!');
       },
     },
     {
       title: '完成认证',
       icon: 'check',
-      value: props.verified ? '是' : '否',
+      value: Store.getState().data.childProps.verified ? '是' : '否',
     },
   ];
 
@@ -81,7 +83,9 @@ const ChildInfo = ({props}: {props: ChildProps}) => {
         bottomDivider
         topDivider
         containerStyle={{backgroundColor: 'black'}}
-        onPress={() => {}}>
+        onPress={() => {
+          navigation.navigate('Login');
+        }}>
         <Icon name="sign-out" size={24} color="white" />
         <ListItem.Content>
           <Text style={{color: 'white', fontSize: 18}}>退出登录</Text>

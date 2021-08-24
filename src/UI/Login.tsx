@@ -16,24 +16,28 @@ import {
   Alert,
   Switch,
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {login, register} from '../Utils/Account';
+import {getUser, login, register} from '../Utils/Account';
+import {setLoggedIn} from '../Utils/dist/Store';
+import Store, {setRole} from '../Utils/Store';
 
 const colors = {
   primary: '#99cc00',
 };
 
 const Login = ({navigation}): ReactElement => {
-
   const [userID, setUserID] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [roleSwitch, setRoleSwitch] = useState<boolean>(true);
 
   const jumpToChild = () => {
+    // TODO: retrieve data
     navigation.navigate('Child');
   };
 
   const jumpToParent = () => {
+    // TODO: retrieve data
     navigation.navigate('Parent');
   };
 
@@ -98,11 +102,19 @@ const Login = ({navigation}): ReactElement => {
                 if (data.status === 'ok') {
                   if (roleSwitch) {
                     jumpToChild();
+                    getUser(Number(userID), 'Teen');
                   } else {
                     jumpToParent();
+                    getUser(Number(userID), 'Parent');
                   }
+
+                  // set global states
+                  Store.dispatch(setLoggedIn(true));
+                  Store.dispatch(setRole(roleSwitch ? 'Teen' : 'Parent'));
+
+                  Toast.show('登录成功！');
                 } else {
-                  Alert.alert('登录失败!');
+                  Toast.show('登录失败，请重新登录！');
                 }
               },
             );
@@ -116,7 +128,15 @@ const Login = ({navigation}): ReactElement => {
         <Button
           title="注册"
           onPress={() => {
-            register(userID, password, roleSwitch ? 'Teen' : 'Parent');
+            register(userID, password, roleSwitch ? 'Teen' : 'Parent').then(
+              data => {
+                if (data.status === 'ok') {
+                  Toast.show('注册成功！');
+                } else {
+                  Toast.show('注册失败！');
+                }
+              },
+            );
           }}
         />
       </View>

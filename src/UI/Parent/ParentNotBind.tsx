@@ -1,9 +1,12 @@
-import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, Text, TextInput, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {BASE_URL} from '../../Utils/Account';
+import Store from '../../Utils/Store';
 
 const ParentNotBind = () => {
+  const [inputData, setInputData] = useState('');
   return (
     <View
       style={{
@@ -41,7 +44,9 @@ const ParentNotBind = () => {
           绑定界面
         </Text>
         <Text style={{flexGrow: 1}} />
-        <Text style={{color: 'white', fontSize: 18}}>Username</Text>
+        <Text style={{color: 'white', fontSize: 18}}>
+          {Store.getState().data.parentProps.username}
+        </Text>
       </View>
       <View
         style={{
@@ -50,7 +55,13 @@ const ParentNotBind = () => {
           height: '30%',
           minHeight: 210,
         }}>
-        <Text style={{textAlign: 'center', fontWeight: 'bold', color: 'white', fontSize: 21}}>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: 21,
+          }}>
           请完成账号绑定操作
         </Text>
         <Text />
@@ -107,6 +118,8 @@ const ParentNotBind = () => {
             width: 300,
             color: 'white',
           }}
+          value={inputData}
+          onChangeText={setInputData}
         />
 
         <View
@@ -115,7 +128,32 @@ const ParentNotBind = () => {
             padding: 20,
             alignItems: 'center',
           }}>
-          <Button title="确定" />
+          <Button
+            title="确定"
+            onPress={() => {
+              Alert.alert(
+                JSON.stringify({
+                  id: Store.getState().data.parentProps.id,
+                  role: 'Parent',
+                  uniqueId: inputData,
+                }),
+              );
+              fetch(BASE_URL + '/user', {
+                method: 'POST',
+                body: JSON.stringify({
+                  id: Store.getState().data.parentProps.id,
+                  role: 'Parent',
+                  uniqueId: inputData,
+                }),
+                headers: {'Content-Type': 'application/json'},
+              })
+                .then(res => res.json())
+                .then(data => {
+                  Alert.alert(data);
+                })
+                .catch(() => {});
+            }}
+          />
           <View style={{width: 20}} />
           <Button title="返回" />
         </View>
