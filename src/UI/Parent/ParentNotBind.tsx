@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Alert, Text, TextInput, View} from 'react-native';
+import {Alert, Text, TextInput, useWindowDimensions, View} from 'react-native';
 import {Button} from 'react-native-elements';
+import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {BASE_URL} from '../../Utils/Account';
-import Store from '../../Utils/Store';
+import Store, {setParentProps} from '../../Utils/Store';
 
-const ParentNotBind = () => {
+const ParentNotBind = ({navigation}) => {
   const [inputData, setInputData] = useState('');
   return (
     <View
@@ -33,7 +34,9 @@ const ParentNotBind = () => {
           title={''}
           type="clear"
           icon={<Icon name="sign-out" color="white" size={30} />}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
         />
         <Text
           style={{
@@ -131,17 +134,10 @@ const ParentNotBind = () => {
           <Button
             title="确定"
             onPress={() => {
-              Alert.alert(
-                JSON.stringify({
-                  id: Store.getState().data.parentProps.id,
-                  role: 'Parent',
-                  uniqueId: inputData,
-                }),
-              );
               fetch(BASE_URL + '/user', {
                 method: 'POST',
                 body: JSON.stringify({
-                  id: Store.getState().data.parentProps.id,
+                  id: Number(Store.getState().data.parentProps.username),
                   role: 'Parent',
                   uniqueId: inputData,
                 }),
@@ -149,13 +145,13 @@ const ParentNotBind = () => {
               })
                 .then(res => res.json())
                 .then(data => {
-                  Alert.alert(data);
+                  Toast.show('绑定成功!');
+                  navigation.navigate('Login');
                 })
                 .catch(() => {});
             }}
           />
           <View style={{width: 20}} />
-          <Button title="返回" />
         </View>
       </View>
     </View>

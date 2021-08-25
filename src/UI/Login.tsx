@@ -104,8 +104,9 @@ const Login = ({navigation}): ReactElement => {
                     jumpToChild();
                     getUser(Number(userID), 'Teen');
                   } else {
-                    jumpToParent();
-                    getUser(Number(userID), 'Parent');
+                    getUser(Number(userID), 'Parent').then(() =>
+                      jumpToParent(),
+                    );
                   }
 
                   // set global states

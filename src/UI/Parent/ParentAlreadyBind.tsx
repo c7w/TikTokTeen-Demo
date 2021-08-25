@@ -80,8 +80,7 @@ const ParentAlreadyBind = ({navigation, parentProps}) => {
               fontSize: 16,
               paddingBottom: '2%',
             }}>
-            您的孩子昨天的使用时长为：
-            {ParseTime(Store.getState().data.parentProps.watchedTime)}
+            您的孩子昨天的使用时长为： 1 小时 40 分钟
           </Text>
           <Text
             style={{
@@ -90,7 +89,7 @@ const ParentAlreadyBind = ({navigation, parentProps}) => {
               fontSize: 16,
               paddingBottom: '2%',
             }}>
-            共计播放视频数为 {Store.getState().data.parentProps.watchedTime} 个
+            共计播放视频数为 12 个
           </Text>
           <Text
             style={{

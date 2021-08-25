@@ -47,11 +47,11 @@ const ChildVerifyFinished = (): ReactElement => {
   );
 };
 
-const ChildNew = ({verified}: {verified: boolean}) => {
+const ChildNew = ({verified, navigation}: {verified: boolean, navigation}) => {
   if (verified) {
     return <ChildVerifyFinished />;
   } else {
-    return <ChildQuestion />;
+    return <ChildQuestion navigation={navigation} />;
   }
 };
 export default ChildNew;

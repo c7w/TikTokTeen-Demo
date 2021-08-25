@@ -7,7 +7,7 @@ export interface LoginStatus {
   status: String;
 }
 
-export const BASE_URL = 'http://tiktokteenbackend.cc7w.cf';
+export const BASE_URL = 'http://121.5.165.232:12001';
 
 const login = async (
   userID: String | undefined,
@@ -58,7 +58,6 @@ const getUser = async (userID: Number, role: String) => {
       return {status: 'failed'};
     });
   if (!data.hasOwnProperty('status')) {
-    Alert.alert(JSON.stringify(data));
     if (role === 'Parent') {
       Store.dispatch(setParentProps(data));
     } else {

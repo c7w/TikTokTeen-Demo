@@ -15,7 +15,7 @@ const DataSlice = createSlice({
     parentProps: {
       id: 123,
       username: 'c7w',
-      alreadyBind: true,
+      alreadyBind: false,
       watchedTime: 10086,
     },
   },

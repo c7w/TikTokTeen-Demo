@@ -16,9 +16,7 @@ const ChildExplore = () => {
       }}>
       <ImageBackground
         source={require('../../Assets/image/videos/1.gif')}
-        style={{height: '100%', width: '100%'}}>
-        
-      </ImageBackground>
+        style={{height: '100%', width: '100%'}}></ImageBackground>
     </View>
   );
 };

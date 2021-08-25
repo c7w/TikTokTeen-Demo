@@ -8,6 +8,7 @@ import ChildMessage from './ChildMessage';
 import ChildNew from './ChildNew';
 import ChildExplore from './ChildExplore';
 import ChildReport from './ChildReport';
+import Store from '../../Utils/Store';
 
 interface ChildProps {
   id: number;
@@ -19,7 +20,7 @@ interface ChildProps {
 interface FootBarProps {
   callback: (element: ReactElement) => void;
   childProps: ChildProps;
-  navigation
+  navigation;
 }
 
 const ChildFootbar = ({callback, childProps, navigation}: FootBarProps) => {
@@ -85,7 +86,12 @@ const ChildFootbar = ({callback, childProps, navigation}: FootBarProps) => {
           </View>
         }
         onPress={() => {
-          callback(<ChildNew verified={childProps.verified} />);
+          callback(
+            <ChildNew
+              navigation={navigation}
+              verified={Store.getState().data.childProps.verified}
+            />,
+          );
         }}
         type="clear"
       />

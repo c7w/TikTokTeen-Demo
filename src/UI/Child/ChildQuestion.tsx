@@ -1,43 +1,18 @@
-import React, {useState, ReactElement} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useState, ReactElement, useEffect} from 'react';
 import {View, Alert, ScrollView} from 'react-native';
 import {Button, Text} from 'react-native-elements';
+import Toast from 'react-native-root-toast';
+import {BASE_URL} from '../../Utils/Account';
+import Store from '../../Utils/Store';
 import RadioGroup from '../Utils/RadioGroup';
 
-let questions = {
-  verifyQuestions: [
-    {
-      question: '题面',
-      options: ['A', 'B', 'C', 'D'],
-      answer: 0, //数组的第i个元素为正确答案
-    },
-    {
-      question: '题面2',
-      options: ['A', 'B', 'C', 'D'],
-      answer: 0, //数组的第i个元素为正确答案
-    },
-    {
-      question: '题面3',
-      options: ['A', 'B', 'C', 'D'],
-      answer: 0, //数组的第i个元素为正确答案
-    },
-    {
-      question: '题面4',
-      options: ['A', 'B', 'C', 'D'],
-      answer: 0, //数组的第i个元素为正确答案
-    },
-    {
-      question: '题面5',
-      options: ['A', 'B', 'C', 'D'],
-      answer: 0, //数组的第i个元素为正确答案
-    },
-  ],
-};
-
 const questionViews = (
+  questions,
   resetAnswerSheet: (index: number, value: number) => void,
 ) => {
   let views = [];
-  for (let i = 0; i < 5; ++i) {
+  for (let i = 0; i < questions.verifyQuestions.length; ++i) {
     views.push(
       <View
         key={'question-' + i}
@@ -66,7 +41,17 @@ const questionViews = (
   return views;
 };
 
-const ChildQuestion = (): ReactElement => {
+const ChildQuestion = ({navigation}): ReactElement => {
+  const [questions, setQuestions] = useState({
+    verifyQuestions: [
+      {
+        question: '题面',
+        options: ['A', 'B', 'C', 'D'],
+        answer: -1, //数组的第i个元素为正确答案
+      },
+    ],
+  });
+
   const [answerSheet, setAnswerSheet] = useState<Array<number>>([
     -1, -1, -1, -1, -1,
   ]);
@@ -76,6 +61,14 @@ const ChildQuestion = (): ReactElement => {
     newSheet[index] = value;
     setAnswerSheet(newSheet);
   };
+
+  useEffect(() => {
+    fetch(BASE_URL + '/verify')
+      .then(res => res.json())
+      .then(data => {
+        setQuestions(data);
+      });
+  }, []);
 
   return (
     <ScrollView
@@ -102,7 +95,7 @@ const ChildQuestion = (): ReactElement => {
         </Text>
       </View>
       <View style={{marginBottom: '5%'}}>
-        {questionViews(resetAnswerSheet)}
+        {questionViews(questions, resetAnswerSheet)}
       </View>
       <View>
         <Button
@@ -110,16 +103,32 @@ const ChildQuestion = (): ReactElement => {
           style={{marginTop: '10%'}}
           onPress={() => {
             let correct = true;
-            for (let i = 0; i < 5; ++i) {
-              if (answerSheet[i] !== questions.verifyQuestions[i].answer) {
+            for (let i = 0; i < questions.verifyQuestions.length; ++i) {
+              if (answerSheet[i] !== questions.verifyQuestions[i].answer - 1) {
                 correct = false;
                 break;
               }
             }
             if (correct) {
-              Alert.alert('对了');
+              Toast.show('回答正确');
+              // POST
+              fetch(BASE_URL + '/verify', {
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify({
+                  id: Number(Store.getState().data.childProps.uesrname),
+                }),
+              })
+                .then(res => res.json())
+                .then(data => {
+                  if (data.status === 'ok') {
+                    Toast.show('认证通过!');
+                  }
+                });
+
+              navigation.navigate('Login');
             } else {
-              Alert.alert('错了');
+              Toast.show('回答错误');
             }
           }}
         />

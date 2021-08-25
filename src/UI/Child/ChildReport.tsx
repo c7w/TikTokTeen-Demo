@@ -35,8 +35,7 @@ const ChildReport = () => {
           fontSize: 16,
           paddingBottom: '2%',
         }}>
-        您昨天的使用时长为：
-        {ParseTime(Store.getState().data.childProps.watchedTime)}
+        您昨天的使用时长为： 1 小时 40 分钟
       </Text>
       <Text
         style={{
@@ -45,7 +44,7 @@ const ChildReport = () => {
           fontSize: 16,
           paddingBottom: '2%',
         }}>
-        共计播放视频数为 {Store.getState().data.childProps.watchedTime} 个
+        共计播放视频数为 12 个
       </Text>
       <Text
         style={{
