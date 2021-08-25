@@ -1,4 +1,3 @@
-import {StackNavigationState} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 

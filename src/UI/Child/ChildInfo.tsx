@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import Clipboard from '@react-native-community/clipboard';
 import {ListItem, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Toast from 'react-native-root-toast';
-import {NavigationContainer} from '@react-navigation/native';
 import Store from '../../Utils/Store';
-import {BASE_URL} from '../../Utils/Account';
 
 interface ChildProps {
   id: number;

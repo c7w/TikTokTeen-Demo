@@ -1,6 +1,5 @@
-import {NavigationContainer} from '@react-navigation/native';
 import React, {useState, ReactElement, useEffect} from 'react';
-import {View, Alert, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {Button, Text} from 'react-native-elements';
 import Toast from 'react-native-root-toast';
 import {BASE_URL} from '../../Utils/Account';

@@ -1,26 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  NavigationAction,
-  NavigationContainerProps,
-  NavigationState,
-  NavigatorScreenParams,
-  StackNavigationState,
-} from '@react-navigation/native';
 import React, {ReactElement, useState} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  Alert,
-  Switch,
-} from 'react-native';
+import {Text, View, Image, TextInput, Button, Switch} from 'react-native';
 import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {getUser, login, register} from '../Utils/Account';
-import {setLoggedIn} from '../Utils/dist/Store';
-import Store, {setRole} from '../Utils/Store';
+import Store, {setRole, setLoggedIn} from '../Utils/Store';
 
 const colors = {
   primary: '#99cc00',

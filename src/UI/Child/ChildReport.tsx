@@ -1,8 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {Image, Text} from 'react-native-elements';
-import {ParseTime} from '../../Utils/Account';
-import Store from '../../Utils/Store';
 
 const ChildReport = () => {
   return (

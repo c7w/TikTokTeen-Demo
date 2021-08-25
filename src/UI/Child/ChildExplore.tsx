@@ -1,7 +1,5 @@
 import React from 'react';
-import {ImageBackground, ScrollView, View} from 'react-native';
-import {Text} from 'react-native-elements';
-import Toast from 'react-native-root-toast';
+import {ImageBackground, View} from 'react-native';
 
 const ChildExplore = () => {
   return (
@@ -16,7 +14,8 @@ const ChildExplore = () => {
       }}>
       <ImageBackground
         source={require('../../Assets/image/videos/1.gif')}
-        style={{height: '100%', width: '100%'}}></ImageBackground>
+        style={{height: '100%', width: '100%'}}
+      />
     </View>
   );
 };

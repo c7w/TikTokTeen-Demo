@@ -1,6 +1,3 @@
-import {unwrapResult} from '@reduxjs/toolkit';
-import {Alert} from 'react-native';
-import Toast from 'react-native-root-toast';
 import Store, {setParentProps, setChildProps} from './Store';
 
 export interface LoginStatus {
